@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Attention Hack Demo（架空・ローカル完結版）</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <h1>架空の動画フィード デモ</h1>
+  <div id="login-bar">
+    <span id="login-status">ログインしていません</span>
+    <select id="user-select">
+      <option value="">-- ユーザーを選択 --</option>
+      {% for u in users %}
+      <option value="{{ u.id }}">{{ u.name }}（{{ u.ab_variant }}群）</option>
+      {% endfor %}
+    </select>
+    <button id="login-btn">ログイン</button>
+  </div>
+</header>
+
+<main id="app" class="hidden">
+  <section id="feed-col">
+    <div id="feed"></div>
+    <div id="sentinel">読み込み中...</div>
+  </section>
+
+  <aside id="debug-panel">
+    <h3>デバッグ: 推薦・最適化層の内部状態</h3>
+    <div id="debug-content">ログインすると表示されます</div>
+    <button id="refresh-debug">更新</button>
+  </aside>
+</main>
+
+<div id="battle-modal" class="hidden">
+  <div class="battle-box">
+    <p>どっちが気になる？</p>
+    <div class="battle-options">
+      <button class="battle-choice" data-side="a"></button>
+      <button class="battle-choice" data-side="b"></button>
+    </div>
+  </div>
+</div>
+
+<template id="card-template">
+  <article class="video-card">
+    <div class="video-thumb">
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="autoplay-overlay hidden">
+        次の動画まで <span class="countdown">5</span> 秒
+      </div>
+    </div>
+    <h3 class="video-title"></h3>
+    <p class="video-meta"></p>
+    <div class="video-controls">
+      <button class="btn-play">▶ 再生</button>
+      <button class="btn-like">👍 いいね</button>
+      <button class="btn-skip">⏭ スキップ</button>
+      <button class="btn-purchase">🛒 関連商品を見る</button>
+    </div>
+  </article>
+</template>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
